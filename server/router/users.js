@@ -1,5 +1,5 @@
 'use strict';
-const db            = require('../database')('inventory');
+const db            = require('../database')('player_manager');
 const passport      = require('passport');
 const Users         = require('../controller/Users')(db);
 const Router        = require('express').Router;
