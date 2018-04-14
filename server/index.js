@@ -1,7 +1,7 @@
 'use strict';
 const bodyParser    = require('body-parser');
 const config        = require('../config');
-const dbExec        = require('./database')('inventory');
+const dbExec        = require('./database')('player_manager');
 const express       = require('express');
 const path          = require('path');
 const userRouter    = require('./router/users');

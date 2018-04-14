@@ -11,13 +11,28 @@
 
 <script>
     export default {
-
-        computed: {
-            title() {
-                return this.$route.params.title;
+        data: function() {
+            this.getInitData();
+            return {
+                loaded: false,
+                friends: [],
+                user: null
+            }   
+        },
+        methods: {
+            getInitData: function () {
+                fetch('/api/init', { credentials: 'same-origin' })
+                    .then(response => response.json())
+                    .then(data => {
+                        this.friends = data.friends;
+                        this.user = data.user;
+                        this.loaded = true;
+                    });
+            },
+            logout: function() {
+                window.location = '/api/users/logout';
             }
         }
-        
     }
 </script>
 

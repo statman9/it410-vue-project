@@ -11,6 +11,7 @@ export default new VueRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/:title', component: Temp },
+        { path: '/login', component: Login },
 
         { path: '*', redirect: '/' }
     ]
