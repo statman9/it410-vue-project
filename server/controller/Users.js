@@ -5,9 +5,9 @@ module.exports = Users;
 function Users(dbExec) {
     const users = {};
 
-    users.create = async function(username, password) {
+    users.create = async function(body) {
         return dbExec(async collection => {
-            const result = await collection.insertOne({ username, password });
+            const result = await collection.insertOne(body);
             return result.insertedCount > 0;
         });        
     };
@@ -25,6 +25,18 @@ function Users(dbExec) {
             return results.length > 0;
         });
     };
+
+    users.findByUsername = async function(username) {
+        return dbExec(async collection => {
+            const results = await collection.find({ username }).toArray();
+            if (results.length > 0) {
+                return results[0];
+            }
+            else {
+                return false;
+            }
+        });
+    }
 
     return users;
 }

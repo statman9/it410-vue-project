@@ -1,38 +1,33 @@
 <template>
     <div id="app" :class="{ loaded: loaded }">
         <header>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="/">Home</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li v-if="!user"><a href="/login">Login</a></li>
-                            <li v-else class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}} <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Edit Profile</a></li>
-                                    <li><a href="#">Messages</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Video</a></li>
-                                    <li><a @click="logout()">Log Out</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" v-if="!user">
+                            <a class="nav-link" href="/login">Log In</a>
+                        </li>
+                        <li class="nav-item dropdown" v-else>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{user.username}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Dashboard</a>
+                                <a class="dropdown-item" href="#">Add User</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/api/users/logout">Log Out</a>
+                            </div>
+                        </li>
+                    </ul>    
                 </div>
             </nav>
         </header>
@@ -44,8 +39,7 @@
 </template>
 
 <script>
-    const bootstrap = require('bootstrap');
-    import 'bootstrap/dist/css/bootstrap.css';
+    import 'bootstrap';
 
     export default {
         data: function() {
@@ -53,7 +47,8 @@
             return {
                 loaded: false,
                 friends: [],
-                user: null
+                user: null,
+                userInfo: null
             }   
         },
         methods: {
@@ -64,6 +59,10 @@
                         this.friends = data.friends;
                         this.user = data.user;
                         this.loaded = true;
+                        this.$http.get('/api/users/info/'+ data.user.username,
+                            info => {
+                                this.userInfo = info;
+                            });
                     });
             },
             logout: function() {
@@ -80,5 +79,8 @@
     }
     #app.loaded {
         opacity: 1;
+    }
+    header {
+        overflow: auto;
     }
 </style>
