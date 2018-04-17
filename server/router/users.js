@@ -33,7 +33,7 @@ router.get('/players', async (req, res) => {
         Users.players()
         .then(data => {
             data
-            ? res.sendStatus(200).json(data)
+            ? res.json(data)
             : res.sendStatus(404);
         });
     } catch (err) {

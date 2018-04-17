@@ -1,0 +1,22 @@
+vetur initialized
+[Error - 7:45:53 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 7:45:55 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 8:01:23 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 8:01:33 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 8:22:34 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 8:23:10 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 
+[Error - 8:23:11 PM] Request textDocument/documentHighlight failed.
+  Message: Request textDocument/documentHighlight failed with message: Cannot read property 'escapedName' of undefined
+  Code: -32603 

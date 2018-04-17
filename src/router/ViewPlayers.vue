@@ -1,6 +1,6 @@
 <template>
     <div id="app" :class="{ loaded: loaded }">
-        <button  v-if="user.usertype != 'player' && user.usertype != 'recruit' && user.usertype != 'alumni'" class="btn btn-lg btn-success" @click="addplayer()">Add Player</button>
+        <button v-if="user.usertype != 'player' && user.usertype != 'recruit' && user.usertype != 'alumni'" class="btn btn-lg btn-success" @click="addplayer()">Add Player</button>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -52,11 +52,11 @@
                         this.friends = data.friends;
                         this.user = data.user;
                         this.loaded = true;
-                    });
-                fetch('/api/users/players')
-                    .then(res => res.json())
-                    .then(players => {
-                        this.players = players;
+                        fetch('/api/users/players')
+                            .then(res => res.json())
+                            .then(players => {
+                                this.players = players;
+                            });
                     });
             },
             logout: function() {
