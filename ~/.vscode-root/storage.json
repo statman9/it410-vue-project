@@ -442,8 +442,23 @@
     "pickerWorkingDir": "/var/www",
     "openedPathsList": {
         "workspaces": [
+            "/var/www/it410-vue-project",
             "/var/www/it410-vue-project"
         ],
         "files": []
+    },
+    "windowsState": {
+        "openedWindows": [],
+        "lastActiveWindow": {
+            "folderPath": "/var/www/it410-vue-project",
+            "backupPath": "/var/www/it410-vue-project/~/.vscode-root/Backups/349a8b6b3dacfd21dc9e9be3fc1faf5a",
+            "uiState": {
+                "mode": 0,
+                "x": 65,
+                "y": 24,
+                "width": 959,
+                "height": 744
+            }
+        }
     }
 }

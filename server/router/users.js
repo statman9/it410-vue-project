@@ -28,12 +28,14 @@ router.get('/exists/:username', async (req, res) => {
     }
 });
 
-router.get('/info/:username', async (req, res) => {
+router.get('/players', async (req, res) => {
     try {
-        const found = await Users.exists(req.params.username);
-        found
-            ? res.sendStatus(200).json(Users.findByUsername(req.params.username))
+        Users.players()
+        .then(data => {
+            data
+            ? res.sendStatus(200).json(data)
             : res.sendStatus(404);
+        });
     } catch (err) {
         console.error(err.stack);
         res.sendStatus(500);
@@ -53,3 +55,17 @@ router.post('/', async (req, res) => {
         }
     }
 });
+
+router.put('/:username', async (req, res) => {
+    const body = req.body;
+    if (!body || !body.username || !body.password) {
+        res.status(400).send('Invalid body');
+    } else {
+        const edited = await Users.edit(body.username, body);
+        if (edited) {
+            res.status(200).send('User created');
+        } else {
+            res.status(500).send("I don't know what happened but it didn't create the user");
+        }
+    }
+})

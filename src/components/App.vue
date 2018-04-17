@@ -21,8 +21,8 @@
                             {{user.username}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Dashboard</a>
-                                <a class="dropdown-item" href="#">Add User</a>
+                                <a class="dropdown-item" href="/Dashboard">Dashboard</a>
+                                <a v-if="user.usertype === 'admin' || user.usertype === 'headcoach'" class="dropdown-item" href="/AddUser">Add User</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/api/users/logout">Log Out</a>
                             </div>
@@ -59,10 +59,6 @@
                         this.friends = data.friends;
                         this.user = data.user;
                         this.loaded = true;
-                        this.$http.get('/api/users/info/'+ data.user.username,
-                            info => {
-                                this.userInfo = info;
-                            });
                     });
             },
             logout: function() {

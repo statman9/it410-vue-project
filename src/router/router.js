@@ -2,6 +2,9 @@
 import Home from './Home'
 import AddUser from './AddUser'
 import Login from './Login'
+import Messages from './Messages'
+import DepthChart from './DepthChart'
+import EditUser from './EditUser'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -13,6 +16,10 @@ export default new VueRouter({
         { path: '/', component: Home },
         { path: '/login', component: Login },
         { path: '/addUser', component: AddUser },
+        { path: '/Messages', component: Messages },
+        { path: '/DepthChart', component: DepthChart },
+        { path: '/EditUser/:username', component: EditUser },
+        { path: '/Dashboard', redirect: '/' },
 
         { path: '*', redirect: '/' }
     ]

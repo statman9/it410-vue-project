@@ -30,7 +30,13 @@ passport.use(new LocalStrategy(function(username, password, done) {
     Users.authenticate(username, password)
         .then(authenticated => {
             if (authenticated) {
-                done(null, { username });
+                Users.findByUsername(username)
+                .then(user => {
+                    done(null, user);
+                })
+                .catch(err => {
+                    done(err, null);
+                });
             } else {
                 done(null, false);
             }
@@ -47,7 +53,13 @@ passport.serializeUser(function(user, done) {
 
 // tell passport how to go from the serialized data back to the user
 passport.deserializeUser(function(id, done) {
-    done(null, { username: id });
+    Users.findByUsername(id)
+        .then(user => {
+            done(null, user);
+        })
+        .catch(err => {
+            done(err, null);
+        });
 });
 
 app.use(cookieParser());
