@@ -109,10 +109,10 @@
                     .then(data => {
                         this.friends = data.friends;
                         this.user = data.user;
-                        this.loaded = true;
-                        fetch('/api/users/info/'+this.$route.params.username)
+                        fetch('/api/users/'+this.$route.params.username)
                         .then(player => {
-                            this.player = player
+                            this.player = player;
+                            this.loaded = true;
                         })
                     });
             },

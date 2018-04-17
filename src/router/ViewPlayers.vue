@@ -23,11 +23,12 @@
                                 Options
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" :href="'/EditUser/' + player.username">Edit</a>
+                                <a class="dropdown-item" :href="'/' + player.username">Edit</a>
                                 <a class="dropdown-item" :href="'/DeleteUser/'+player.username">Another action</a>
                             </div>
                         </div>
                     </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -49,13 +50,12 @@
                 fetch('/api/init', { credentials: 'same-origin' })
                     .then(response => response.json())
                     .then(data => {
-                        this.friends = data.friends;
-                        this.user = data.user;
-                        this.loaded = true;
                         fetch('/api/users/players')
-                            .then(res => res.json())
                             .then(players => {
+                                this.friends = data.friends;
+                                this.user = data.user;
                                 this.players = players;
+                                this.loaded = true;
                             });
                     });
             },

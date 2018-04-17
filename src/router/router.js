@@ -20,9 +20,7 @@ export default new VueRouter({
         { path: '/Messages', component: Messages },
         { path: '/DepthChart', component: DepthChart },
         { path: '/ViewPlayers', component: ViewPlayers },
-        { path: '/EditUser/:username', component: EditUser },
+        { path: '/:username', component: EditUser },
         { path: '/Dashboard', redirect: '/' },
-
-        { path: '*', redirect: '/' }
     ]
 });
