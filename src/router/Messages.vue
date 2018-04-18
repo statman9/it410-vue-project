@@ -1,15 +1,18 @@
 <template>
     <div id="app" :class="{ loaded: loaded }">
-        <form method="POST" action="/api/users">
-            <p>Username: <input type="text" name="username" class="form-control" required></p>
-            <p>Password: <input type="password" name="password" class="form-control" required></p>
-            <p>First Name: <input type="text" name="firstname" class="form-control"></p>
-            <p>Last Name: <input type="text" name="lastname" class="form-control"></p>
-            <p>Permissions: <input type="text" name="usertype" class="form-control"></p>
-            
-            <p><input type="submit" class="btn btn-primary"></p>
-        </form>
-        <!--<h2 v-else>You are not authorized to access this page</h2>-->
+        <div class="list-group col-sm-3">
+            <a v-for="message in user.message" :id="message.id" @click="messageRead(message.id)" :key="message.id" href="#" :class="'list-group-item list-group-item-action flex-column align-items-start ' + (message.read ? 'list-group-item-light' : 'list-group-item-dark')">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{message.from}}</h5>
+                <small>{{message.timeSent}}</small>
+                </div>
+                <p class="mb-1">{{message.subject}}</p>
+                <small>{{message.message.substr(0, 100)}}...</small>
+            </a>
+        </div>
+        <div class="col-sm-9" v-if="messageContent">
+            <div>{{messageContent}}</div>
+        </div>
     </div>
 </template>
 
@@ -21,7 +24,8 @@
                 loaded: false,
                 friends: [],
                 user: null,
-                userInfo: null
+                messages: null,
+                messageContent: null
             }   
         },
         methods: {
@@ -36,6 +40,20 @@
             },
             logout: function() {
                 window.location = '/api/users/logout';
+            },
+            messageRead(id) {
+                fetch('/api/users/' + this.user.username + '/message/' + id)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById(id).classList.remove('list-group-item-dark');
+                        document.getElementById(id).classList.add('list-group-item-light');
+                        messageContent = this.messages.filter(m => m.id === id)[0].message;
+                    }
+                    else {
+                        console.log("Error Occurred");
+                    }
+                })
             }
         }
     }

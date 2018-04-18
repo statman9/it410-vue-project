@@ -1,6 +1,12 @@
 <template>
     <div>
-        <h2>This is the dashboard</h2>
+        <h2 v-if="!user">Log in to view dashboard</h2>
+        <div v-else>
+            <a href="/AddUser">Add User</a>
+            <a href="/ViewPlayers">View Players</a>
+            <a href="/SendMessage">Send Message</a>
+            <a href="/Messages">View Messages</a>
+        </div>
     </div>
 </template>
 
